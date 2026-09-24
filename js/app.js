@@ -28,10 +28,50 @@ document.addEventListener('DOMContentLoaded', () => {
     audit: 'System Audit Trail & Regulatory Logs'
   };
 
+  const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+  const sidebarEl = document.querySelector('.sidebar');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+  const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+  const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+
+  function closeMobileSidebar() {
+    if (sidebarEl) sidebarEl.classList.remove('mobile-open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+  }
+
+  function openMobileSidebar() {
+    if (sidebarEl) sidebarEl.classList.add('mobile-open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+  }
+
+  if (sidebarToggleBtn) {
+    sidebarToggleBtn.addEventListener('click', openMobileSidebar);
+  }
+  if (sidebarCloseBtn) {
+    sidebarCloseBtn.addEventListener('click', closeMobileSidebar);
+  }
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+  }
+
+  const bottomNavMore = document.getElementById('bottom-nav-more');
+  if (bottomNavMore) {
+    bottomNavMore.addEventListener('click', openMobileSidebar);
+  }
+
   function switchView(viewId) {
     activeView = viewId;
+    closeMobileSidebar();
+
+    // Desktop sidebar
     navItems.forEach(item => {
       if (item.dataset.view === viewId) item.classList.add('active');
+      else item.classList.remove('active');
+    });
+
+    // Mobile bottom nav
+    bottomNavItems.forEach(item => {
+      if (item.dataset.bottomView === viewId) item.classList.add('active');
       else item.classList.remove('active');
     });
 
@@ -43,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pageTitle && viewTitles[viewId]) {
       pageTitle.textContent = viewTitles[viewId];
     }
+
+    // Scroll main body to top smoothly on view switch
+    const mainContentBody = document.querySelector('.content-body');
+    if (mainContentBody) mainContentBody.scrollTop = 0;
 
     // Refresh charts or view-specific components
     if (viewId === 'dashboard') {
@@ -70,6 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const target = item.dataset.view;
+      if (target) switchView(target);
+    });
+  });
+
+  bottomNavItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.dataset.bottomView;
       if (target) switchView(target);
     });
   });
@@ -224,11 +275,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderDashboard() {
     const stats = store.getStats();
 
-    // Top badges
+    // Top & bottom badges
     const navInvBadge = document.getElementById('nav-inventory-badge');
     const navReqBadge = document.getElementById('nav-requests-badge');
+    const bottomReqBadge = document.getElementById('bottom-requests-badge');
+    const totalPendingOrCritical = stats.pendingRequestsCount + stats.activeCriticalCount;
+
     if (navInvBadge) navInvBadge.textContent = stats.totalUnits;
-    if (navReqBadge) navReqBadge.textContent = stats.pendingRequestsCount + stats.activeCriticalCount;
+    if (navReqBadge) navReqBadge.textContent = totalPendingOrCritical;
+    if (bottomReqBadge) bottomReqBadge.textContent = totalPendingOrCritical;
 
     // KPI Cards
     const kpiAvail = document.getElementById('kpi-available-units');
@@ -1166,6 +1221,79 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeView === 'dashboard') renderDashboard();
     if (activeView === 'reports') renderReportsView();
   });
+
+  // ========================================================
+  // MOBILE GESTURE & SWIPE CONTROLS
+  // Prevents accidental browser history navigation and enables in-app swiping
+  // ========================================================
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!e.touches || e.touches.length === 0) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = Math.abs(currentX - touchStartX);
+    const diffY = Math.abs(currentY - touchStartY);
+
+    // If gesture starts within 25px of left/right screen edge and is predominantly horizontal,
+    // prevent default browser gesture (swipe to go back/forward)
+    if ((touchStartX < 25 || touchStartX > window.innerWidth - 25) && diffX > diffY) {
+      if (e.cancelable) e.preventDefault();
+    }
+  }, { passive: false });
+
+  window.addEventListener('touchend', (e) => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    
+    // Don't switch tabs if a modal or the sidebar drawer is open
+    if (document.querySelector('.modal-overlay.active')) return;
+    if (sidebarEl && sidebarEl.classList.contains('mobile-open')) return;
+
+    // Ignore touches on interactive components (tables, canvas, forms, buttons)
+    const target = e.target;
+    if (
+      target.closest('.table-responsive') ||
+      target.closest('canvas') ||
+      target.closest('input') ||
+      target.closest('select') ||
+      target.closest('textarea') ||
+      target.closest('.btn') ||
+      target.closest('.compat-matrix-grid')
+    ) {
+      return;
+    }
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    const duration = Date.now() - touchStartTime;
+
+    // Detect quick horizontal swipe: min 55px horizontal displacement, under 45px vertical, within 450ms
+    if (Math.abs(diffX) > 55 && Math.abs(diffY) < 45 && duration < 450) {
+      const mainTabs = ['dashboard', 'inventory', 'requests', 'donors'];
+      const currentIdx = mainTabs.indexOf(activeView);
+      if (currentIdx !== -1) {
+        if (diffX < 0 && currentIdx < mainTabs.length - 1) {
+          // Swiped left -> advance to next tab
+          switchView(mainTabs[currentIdx + 1]);
+        } else if (diffX > 0 && currentIdx > 0) {
+          // Swiped right -> go to previous tab
+          switchView(mainTabs[currentIdx - 1]);
+        }
+      }
+    }
+  }, { passive: true });
 
   // Initial render
   refreshAllViews();
