@@ -114,21 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Theme Toggle ---
+  // --- Theme Changer System (5 Visual Themes) ---
+  const themeSelector = document.getElementById('theme-selector');
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  const currentTheme = localStorage.getItem('BBS_THEME') || 'light';
-  document.documentElement.setAttribute('data-theme', currentTheme);
+  const savedTheme = localStorage.getItem('BBS_THEME') || 'light';
+  
+  function applyTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+    localStorage.setItem('BBS_THEME', themeName);
+    if (themeSelector) themeSelector.value = themeName;
+    showToast(`Active Theme: ${themeName.charAt(0).toUpperCase() + themeName.slice(1)} Mode`, 'info');
+    // Re-render canvas charts for theme palette adjustments
+    if (activeView === 'dashboard') renderDashboard();
+    if (activeView === 'reports') renderReportsView();
+  }
+
+  // Set initial theme
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (themeSelector) {
+    themeSelector.value = savedTheme;
+    themeSelector.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
+  }
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const active = document.documentElement.getAttribute('data-theme');
-      const next = active === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('BBS_THEME', next);
-      showToast(`Switched to ${next} theme`, 'info');
-      // Re-render canvas charts for color adjustment
-      if (activeView === 'dashboard') renderDashboard();
-      if (activeView === 'reports') renderReportsView();
+      const active = document.documentElement.getAttribute('data-theme') || 'light';
+      const cycle = ['light', 'dark', 'navy', 'emerald', 'saffron'];
+      const nextIdx = (cycle.indexOf(active) + 1) % cycle.length;
+      applyTheme(cycle[nextIdx]);
     });
   }
 
@@ -819,7 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('card-donor-donations').textContent = donor.totalDonations;
     document.getElementById('card-donor-lives').textContent = donor.totalDonations * 3;
     document.getElementById('card-donor-badge').textContent = donor.badge;
-    document.getElementById('card-barcode-text').textContent = `${donor.id}-PULSELINK`;
+    document.getElementById('card-barcode-text').textContent = `${donor.id}-PULSELINK-IN`;
 
     openModal('modal-donor-card');
   };
@@ -851,7 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.calloutDonor = function(donorId) {
     const donor = store.state.donors.find(d => d.id === donorId);
     if (!donor) return;
-    showToast(`Emergency SMS sent to ${donor.name} (${donor.phone}): "Urgent call for ${donor.bloodGroup} blood at Metro Central Blood Bank"`, 'warning');
+    showToast(`Emergency SMS sent to ${donor.name} (${donor.phone}): "Urgent call for ${donor.bloodGroup} blood at Rotary Central Blood Bank (New Delhi)"`, 'warning');
     store.addLog('DONOR_CALLOUT', `Simulated urgent broadcast sent to ${donor.name} (${donor.bloodGroup})`);
   };
 
@@ -1084,15 +1099,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (summaryText) {
       summaryText.innerHTML = `
-        <p><strong>PulseLink Regional Blood Banking Network - Comprehensive Utilization Audit</strong></p>
-        <p>As of <strong>${new Date().toLocaleDateString()}</strong>, the blood banking network holds a total of <strong>${stats.totalUnits} active screened units</strong> across all affiliated regional centers.</p>
+        <p><strong>PulseLink National Blood Transfusion Network (NBTC India) - Utilization Audit</strong></p>
+        <p>As of <strong>${new Date().toLocaleDateString('en-IN')}</strong>, the blood banking network holds a total of <strong>${stats.totalUnits} active screened units</strong> across all affiliated regional centers (Delhi, Bengaluru, Mumbai).</p>
         <ul style="margin: 0.75rem 0 0.75rem 1.5rem; line-height: 1.8;">
-          <li><strong>Universal O- Reserve Status:</strong> ${stats.groupCounts['O-'] || 0} units available. ${stats.groupCounts['O-'] < 3 ? '<span style="color: var(--danger); font-weight: 700;">(CRITICAL DEFICIT - Emergency callout required)</span>' : '(Adequate)'}</li>
+          <li><strong>Universal O- Reserve Status:</strong> ${stats.groupCounts['O-'] || 0} units available. ${stats.groupCounts['O-'] < 3 ? '<span style="color: var(--danger); font-weight: 700;">(CRITICAL DEFICIT - National emergency callout required)</span>' : '(Adequate)'}</li>
           <li><strong>Units Nearing Expiry (&le; 7 days):</strong> <strong>${stats.expiringSoonCount} units</strong> slated for accelerated cross-matching or component reprocessing to eliminate biological waste.</li>
           <li><strong>Active Hospital Requests:</strong> <strong>${stats.pendingRequestsCount + stats.inTransitRequestsCount} orders</strong>, with <strong>${stats.activeCriticalCount}</strong> designated as STAT / Code Red trauma requests.</li>
           <li><strong>Donor Community Pool:</strong> <strong>${stats.totalDonors} registered donors</strong> with <strong>${stats.eligibleDonorsCount} ready for immediate callout</strong>.</li>
         </ul>
-        <p>All blood components are tracked under continuous temperature and cold-chain monitoring protocols in accordance with FDA and WHO biological safety directives.</p>
+        <p>All blood components are tracked under continuous temperature and cold-chain monitoring protocols in accordance with National Blood Transfusion Council (NBTC), DCGI, and WHO biological safety directives.</p>
       `;
     }
 

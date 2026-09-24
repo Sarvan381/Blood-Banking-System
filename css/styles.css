@@ -62,6 +62,51 @@
   --danger-subtle: #450a0a;
 }
 
+[data-theme="navy"] {
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-subtle: #eff6ff;
+  --primary-border: #bfdbfe;
+  --bg-sidebar: #0f172a;
+  --bg-sidebar-active: #1d4ed8;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --bg-main: #f0f4f9;
+  --bg-surface: #ffffff;
+  --border: #cbd5e1;
+  --border-subtle: #e2e8f0;
+}
+
+[data-theme="emerald"] {
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-subtle: #ecfdf5;
+  --primary-border: #a7f3d0;
+  --bg-sidebar: #064e3b;
+  --bg-sidebar-active: #059669;
+  --text-main: #064e3b;
+  --text-muted: #047857;
+  --bg-main: #f0fdf4;
+  --bg-surface: #ffffff;
+  --border: #bbf7d0;
+  --border-subtle: #dcfce7;
+}
+
+[data-theme="saffron"] {
+  --primary: #d97706;
+  --primary-hover: #b45309;
+  --primary-subtle: #fffbeb;
+  --primary-border: #fde68a;
+  --bg-sidebar: #451a03;
+  --bg-sidebar-active: #d97706;
+  --text-main: #451a03;
+  --text-muted: #78350f;
+  --bg-main: #fffdf5;
+  --bg-surface: #ffffff;
+  --border: #fef3c7;
+  --border-subtle: #fffbeb;
+}
+
 /* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -314,8 +359,8 @@ body {
   gap: 1rem;
 }
 
-/* Role Selector */
-.role-badge-box {
+/* Role & Theme Selectors */
+.role-badge-box, .theme-badge-box {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -325,13 +370,13 @@ body {
   border: 1px solid var(--border);
 }
 
-.role-label {
+.role-label, .theme-label {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
 }
 
-.role-select {
+.role-select, .theme-select {
   border: none;
   background: transparent;
   font-size: 0.85rem;

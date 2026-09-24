@@ -80,9 +80,9 @@
       <div class="emergency-hotline">
         <div class="emergency-hotline-title">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-          24/7 STAT Blood Line
+          24/7 National Blood Helpline
         </div>
-        <div class="emergency-hotline-number">+1 (555) 911-BLOD</div>
+        <div class="emergency-hotline-number">1910 / 108 (Toll-Free)</div>
       </div>
     </div>
   </aside>
@@ -95,11 +95,23 @@
         <h1 class="page-title" id="page-title-heading">Command Dashboard</h1>
         <div class="status-beacon" id="system-status-beacon">
           <span class="status-dot"></span>
-          <span id="system-status-text">Network Connected</span>
+          <span id="system-status-text">Network Connected (NBTC India)</span>
         </div>
       </div>
 
       <div class="topbar-right">
+        <!-- Interactive Theme Changer -->
+        <div class="theme-badge-box">
+          <span class="theme-label">&#127912; Theme:</span>
+          <select id="theme-selector" class="theme-select" title="Switch Visual Theme Palette">
+            <option value="light">Crimson Medical (Light)</option>
+            <option value="dark">Slate Midnight (Dark)</option>
+            <option value="navy">AIIMS Sapphire (Navy)</option>
+            <option value="emerald">Ayush Health (Emerald)</option>
+            <option value="saffron">Surya Amber (Saffron)</option>
+          </select>
+        </div>
+
         <!-- Interactive Role Switcher -->
         <div class="role-badge-box">
           <span class="role-label">Active Role:</span>
@@ -117,8 +129,8 @@
           <span>STAT Blood Request</span>
         </button>
 
-        <!-- Dark/Light Theme Toggle -->
-        <button class="btn-icon" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+        <!-- Quick Theme Toggle Icon -->
+        <button class="btn-icon" id="theme-toggle-btn" title="Toggle Quick Dark/Light Mode">
           <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         </button>
 
@@ -517,7 +529,7 @@
           <div class="card">
             <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">Universal Red Cell Donor (O Negative)</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-              O- red blood cells lack A, B, and Rh antigens. In trauma emergencies where there is no time to cross-match, O- is the gold standard for immediate transfusion. Only 7% of the global population has O- blood.
+              O- red blood cells lack A, B, and Rh antigens. In trauma emergencies (e.g. NH-48 or highway accidents) where there is no time to cross-match, O- is the gold standard for immediate transfusion. Only ~2% of the Indian population has O- blood, making it critical to reserve for STAT emergencies.
             </p>
           </div>
 
@@ -702,9 +714,10 @@
           <div class="form-group">
             <label class="form-label">Collection Center *</label>
             <select class="form-select" id="add-unit-center" required>
-              <option value="CEN-01">Metro Central Blood Bank</option>
-              <option value="CEN-02">St. Jude Regional Blood Center</option>
-              <option value="CEN-03">Apex Trauma Hub</option>
+              <option value="CEN-01">Rotary Central Blood Bank (New Delhi)</option>
+              <option value="CEN-02">Indian Red Cross Society Regional Center (New Delhi)</option>
+              <option value="CEN-03">Rashtrotthana Blood Centre (Bengaluru)</option>
+              <option value="CEN-04">Lions Blood Bank & Research Foundation (Mumbai)</option>
             </select>
           </div>
         </div>
@@ -753,16 +766,16 @@
           <div class="form-group">
             <label class="form-label">Requesting Hospital *</label>
             <select class="form-select" id="req-hospital" required>
-              <option value="City Memorial Hospital">City Memorial Hospital (Trauma Center)</option>
-              <option value="Apex Heart & Surgical Institute">Apex Heart & Surgical Institute</option>
-              <option value="St. Luke Children’s Specialty Hospital">St. Luke Children’s Hospital</option>
-              <option value="Riverdale General Hospital">Riverdale General Hospital</option>
+              <option value="AIIMS Trauma Centre (JPNATC)">AIIMS Trauma Centre (JPNATC), New Delhi</option>
+              <option value="Apollo Hospitals Bannerghatta">Apollo Hospitals Bannerghatta, Bengaluru</option>
+              <option value="Tata Memorial Hospital (ACTREC)">Tata Memorial Hospital (ACTREC), Mumbai</option>
+              <option value="Christian Medical College (CMC)">Christian Medical College (CMC), Vellore</option>
             </select>
           </div>
 
           <div class="form-group">
             <label class="form-label">Patient Name / Bay *</label>
-            <input type="text" class="form-input" id="req-patient" placeholder="e.g. John Doe (ICU-3)" required>
+            <input type="text" class="form-input" id="req-patient" placeholder="e.g. Ramesh Chandra (Trauma ICU Bay 3)" required>
           </div>
         </div>
 
@@ -817,12 +830,12 @@
 
         <div class="form-group">
           <label class="form-label">Clinical Indication / Diagnosis *</label>
-          <textarea class="form-textarea" id="req-reason" rows="2" placeholder="e.g. Massive hemorrhage due to blunt trauma" required></textarea>
+          <textarea class="form-textarea" id="req-reason" rows="2" placeholder="e.g. NH-48 accident polytrauma with acute blood loss" required></textarea>
         </div>
 
         <div class="form-group">
           <label class="form-label">Attending Physician / Transfusion Officer *</label>
-          <input type="text" class="form-input" id="req-doctor" placeholder="e.g. Dr. Alex Mercer" required>
+          <input type="text" class="form-input" id="req-doctor" placeholder="e.g. Dr. Rajeshwar Iyer (Trauma In-Charge)" required>
         </div>
       </div>
       <div class="modal-footer">
@@ -848,7 +861,7 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Full Name *</label>
-            <input type="text" class="form-input" id="donor-name" required placeholder="e.g. Jonathan Hope">
+            <input type="text" class="form-input" id="donor-name" required placeholder="e.g. Rohan Sharma">
           </div>
 
           <div class="form-group">
@@ -869,12 +882,12 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Email Address *</label>
-            <input type="email" class="form-input" id="donor-email" required placeholder="donor@example.com">
+            <input type="email" class="form-input" id="donor-email" required placeholder="rohan.sharma92@gmail.com">
           </div>
 
           <div class="form-group">
             <label class="form-label">Phone Number *</label>
-            <input type="tel" class="form-input" id="donor-phone" required placeholder="+1 (555) 000-0000">
+            <input type="tel" class="form-input" id="donor-phone" required placeholder="+91 98102 44321">
           </div>
         </div>
 
@@ -897,7 +910,7 @@
 
         <div class="form-group">
           <label class="form-label">City / Residential Area</label>
-          <input type="text" class="form-input" id="donor-address" placeholder="e.g. 100 Main St, Metropolis">
+          <input type="text" class="form-input" id="donor-address" placeholder="e.g. Flat 402, Shivalik Enclave, Sector 62, Noida, Uttar Pradesh">
         </div>
       </div>
       <div class="modal-footer">
@@ -919,22 +932,22 @@
       <div class="donor-id-card" id="digital-donor-card-element">
         <div class="donor-card-top">
           <div>
-            <div class="donor-card-title">National Transfusion Registry</div>
-            <div class="donor-card-org">PulseLink Blood Bank</div>
+            <div class="donor-card-title">National Transfusion Registry (NBTC)</div>
+            <div class="donor-card-org">PulseLink India Blood Bank</div>
           </div>
           <div class="donor-blood-symbol" id="card-blood-group">O-</div>
         </div>
 
-        <div class="donor-card-name" id="card-donor-name">Alexander Reed</div>
+        <div class="donor-card-name" id="card-donor-name">Rohan Sharma</div>
         <div class="donor-card-id" id="card-donor-id">ID: DON-1001</div>
 
         <div class="donor-card-stats">
           <div>
-            <div class="donor-stat-val" id="card-donor-donations">12</div>
+            <div class="donor-stat-val" id="card-donor-donations">14</div>
             <div class="donor-stat-lbl">Donations</div>
           </div>
           <div>
-            <div class="donor-stat-val" id="card-donor-lives">36</div>
+            <div class="donor-stat-val" id="card-donor-lives">42</div>
             <div class="donor-stat-lbl">Lives Saved</div>
           </div>
           <div>
@@ -946,7 +959,7 @@
         <div class="donor-card-barcode">
           <div>
             <div class="barcode-lines">||| | |||| || | || |||| |</div>
-            <div id="card-barcode-text">DON-1001-PULSELINK</div>
+            <div id="card-barcode-text">DON-1001-PULSELINK-IN</div>
           </div>
           <div style="text-align: right;">
             <div>STATUS: VERIFIED</div>
@@ -1037,7 +1050,7 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Contact Phone *</label>
-            <input type="tel" class="form-input" id="appt-phone" required placeholder="+1 (555) ...">
+            <input type="tel" class="form-input" id="appt-phone" required placeholder="+91 98102 44321">
           </div>
 
           <div class="form-group">
@@ -1058,9 +1071,10 @@
         <div class="form-group">
           <label class="form-label">Donation Center *</label>
           <select class="form-select" id="appt-center" required>
-            <option value="Metro Central Blood Bank">Metro Central Blood Bank (Metropolis)</option>
-            <option value="St. Jude Regional Blood Center">St. Jude Regional Blood Center</option>
-            <option value="Apex Trauma & Transfusion Hub">Apex Trauma Hub (Riverdale)</option>
+            <option value="Rotary Central Blood Bank">Rotary Central Blood Bank (New Delhi)</option>
+            <option value="Indian Red Cross Society Regional Center">Indian Red Cross Society Regional Center (New Delhi)</option>
+            <option value="Rashtrotthana Blood Centre">Rashtrotthana Blood Centre (Bengaluru)</option>
+            <option value="Lions Blood Bank & Transfusion Research">Lions Blood Bank & Transfusion Research (Mumbai)</option>
           </select>
         </div>
 

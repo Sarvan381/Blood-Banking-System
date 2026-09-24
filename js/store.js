@@ -3,7 +3,7 @@
  * Handles reactive localStorage persistence, business logic, compatibility checks and audits.
  */
 
-const STORAGE_KEY = 'ANTIGRAVITY_BBS_STATE_V1';
+const STORAGE_KEY = 'ANTIGRAVITY_BBS_STATE_V2_IN';
 
 class BloodBankStore {
   constructor() {
@@ -198,7 +198,7 @@ class BloodBankStore {
     const newReq = {
       id,
       hospitalId: reqData.hospitalId || 'HOSP-01',
-      hospitalName: reqData.hospitalName || 'City Memorial Hospital',
+      hospitalName: reqData.hospitalName || 'AIIMS Trauma Centre (JPNATC)',
       patientName: reqData.patientName,
       bloodGroup: reqData.bloodGroup,
       component: reqData.component || 'PRBC',
@@ -210,7 +210,7 @@ class BloodBankStore {
       requestDate: new Date().toISOString(),
       reason: reqData.reason || 'Medical Transfusion Protocol',
       doctor: reqData.doctor || 'Attending Physician',
-      assignedCenter: reqData.assignedCenter || 'Metro Central Blood Bank',
+      assignedCenter: reqData.assignedCenter || 'Rotary Central Blood Bank',
       allocatedBagIds: []
     };
 
@@ -303,7 +303,7 @@ class BloodBankStore {
       gender: donorData.gender || 'Not Specified',
       dob: donorData.dob || '1995-01-01',
       weightKg: parseFloat(donorData.weightKg) || 65,
-      address: donorData.address || 'Metropolis',
+      address: donorData.address || 'New Delhi, India',
       totalDonations: parseInt(donorData.totalDonations, 10) || 0,
       lastDonationDate: donorData.lastDonationDate || '',
       eligible: donorData.eligible !== false,
