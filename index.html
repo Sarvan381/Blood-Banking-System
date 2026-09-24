@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseLink | Enterprise Blood Banking & Transfusion System</title>
+  <meta name="description" content="A comprehensive blood banking management system connecting donors, hospitals, and blood banks with real-time inventory tracking and emergency dispatch.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app-container">
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">PulseLink BBS</div>
+        <span class="brand-tag">Blood Banking Hub</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Core Operations</div>
+      <a class="nav-item active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a class="nav-item" data-view="inventory">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <span>Live Inventory</span>
+        <span class="nav-badge" id="nav-inventory-badge">0</span>
+      </a>
+
+      <a class="nav-item" data-view="requests">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>Emergency Requests</span>
+        <span class="nav-badge danger" id="nav-requests-badge">0</span>
+      </a>
+
+      <a class="nav-item" data-view="donors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Donors Registry</span>
+      </a>
+
+      <div class="nav-section-title">Clinical & Drives</div>
+      <a class="nav-item" data-view="compatibility">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+        <span>Compatibility Matrix</span>
+      </a>
+
+      <a class="nav-item" data-view="camps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Donation Camps</span>
+      </a>
+
+      <a class="nav-item" data-view="appointments">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Appointments</span>
+      </a>
+
+      <div class="nav-section-title">Governance</div>
+      <a class="nav-item" data-view="reports">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Reports & Analytics</span>
+      </a>
+
+      <a class="nav-item" data-view="audit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span>Audit Trail</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="emergency-hotline">
+        <div class="emergency-hotline-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          24/7 STAT Blood Line
+        </div>
+        <div class="emergency-hotline-number">+1 (555) 911-BLOD</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <!-- TOP NAVIGATION BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="page-title-heading">Command Dashboard</h1>
+        <div class="status-beacon" id="system-status-beacon">
+          <span class="status-dot"></span>
+          <span id="system-status-text">Network Connected</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Interactive Role Switcher -->
+        <div class="role-badge-box">
+          <span class="role-label">Active Role:</span>
+          <select id="user-role-selector" class="role-select" title="Switch simulated role">
+            <option value="ADMIN">Blood Bank Director (Admin)</option>
+            <option value="HOSPITAL">Hospital Physician (Requester)</option>
+            <option value="DONOR">Registered Donor</option>
+            <option value="PUBLIC">Public Visitor</option>
+          </select>
+        </div>
+
+        <!-- Emergency Request Shortcut -->
+        <button class="btn btn-danger-emergency" id="btn-quick-emergency">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>STAT Blood Request</span>
+        </button>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button class="btn-icon" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+          <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <!-- Reset Data Button -->
+        <button class="btn-icon" id="btn-reset-data" title="Reset Demo Data">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY -->
+    <main class="content-body">
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: DASHBOARD -->
+      <!-- ========================================== -->
+      <section id="view-dashboard" class="view-panel active">
+        <!-- Emergency STAT Alert Banner -->
+        <div class="emergency-banner" id="dashboard-emergency-banner" style="display: none;">
+          <div class="emergency-banner-content">
+            <div class="emergency-banner-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <div class="emergency-banner-title" id="emergency-banner-title">CRITICAL CODE RED REQUEST ACTIVE</div>
+              <div class="emergency-banner-desc" id="emergency-banner-desc">Hospital Trauma Center requires immediate blood units dispatch.</div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-banner-action">View Dispatch</button>
+        </div>
+
+        <!-- KPI Metric Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-title">Available Blood Units</span>
+              <div class="kpi-icon crimson">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-available-units">0</div>
+            <div class="kpi-subtitle">
+              <span class="badge badge-success" id="kpi-tested-pct">100% Screened</span>
+              <span>In storage</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-title">Emergency Requests</span>
+              <div class="kpi-icon amber">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-emergency-requests">0</div>
+            <div class="kpi-subtitle">
+              <span class="badge badge-critical" id="kpi-critical-count">0 STAT</span>
+              <span>Pending triage</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-title">Expiring Soon (&le; 7d)</span>
+              <div class="kpi-icon blue">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-expiring-units">0</div>
+            <div class="kpi-subtitle">
+              <span class="badge badge-warning">Priority Allocation</span>
+              <span>To reduce waste</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-title">Registered Donors</span>
+              <div class="kpi-icon emerald">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-total-donors">0</div>
+            <div class="kpi-subtitle">
+              <span class="badge badge-success" id="kpi-eligible-donors">0 Eligible</span>
+              <span>Ready for callout</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 Blood Groups Inventory Shelf Quick-View -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" color="var(--primary)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              Blood Group Inventory Reserves (Units Available)
+            </div>
+            <div class="toolbar-right">
+              <span class="badge badge-critical">&lt; 3 Units (Critical Low)</span>
+              <span class="badge badge-warning">3-5 Units (Moderate)</span>
+              <span class="badge badge-success">&gt; 5 Units (Adequate)</span>
+            </div>
+          </div>
+          <div class="blood-groups-shelf" id="blood-groups-shelf">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Current Stock by Blood Group & Critical Line
+              </div>
+              <span class="badge badge-neutral">Auto-updated</span>
+            </div>
+            <div class="canvas-container">
+              <canvas id="canvas-stock-bar"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10h-10z"/></svg>
+                Component Distribution
+              </div>
+            </div>
+            <div class="canvas-container">
+              <canvas id="canvas-component-donut"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Critical Requests & Dispatch Activity -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Active Hospital Emergency Transfusion Orders
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-see-all-requests">View All Requests</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Hospital & Dept</th>
+                  <th>Patient</th>
+                  <th>Blood Group</th>
+                  <th>Component</th>
+                  <th>Units</th>
+                  <th>Urgency</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-recent-requests-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: LIVE INVENTORY -->
+      <!-- ========================================== -->
+      <section id="view-inventory" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="search-input-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="inventory-search" placeholder="Search Bag ID, Group, Shelf...">
+            </div>
+
+            <select id="inventory-filter-group" class="select-filter">
+              <option value="">All Blood Groups</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+
+            <select id="inventory-filter-comp" class="select-filter">
+              <option value="">All Components</option>
+              <option value="PRBC">Packed RBC (PRBC)</option>
+              <option value="WB">Whole Blood (WB)</option>
+              <option value="PLT">Platelets (PLT)</option>
+              <option value="FFP">Plasma (FFP)</option>
+              <option value="CRYO">Cryoprecipitate</option>
+            </select>
+
+            <select id="inventory-filter-status" class="select-filter">
+              <option value="">All Statuses</option>
+              <option value="Available">Available</option>
+              <option value="Reserved">Reserved</option>
+              <option value="Testing / Quarantine">Testing / Quarantine</option>
+              <option value="Expiring Soon">Expiring Soon</option>
+              <option value="Dispatched">Dispatched</option>
+            </select>
+          </div>
+
+          <div class="toolbar-right">
+            <button class="btn btn-secondary btn-sm" id="btn-export-inventory-csv">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+            <button class="btn btn-primary btn-sm" id="btn-add-unit-modal-open">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Blood Unit
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Unit / Bag ID</th>
+                <th>Group</th>
+                <th>Component</th>
+                <th>Volume</th>
+                <th>Collection Date</th>
+                <th>Expiry Date</th>
+                <th>Storage Location</th>
+                <th>Screening NAT/Serology</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 3: EMERGENCY REQUESTS & DISPATCH -->
+      <!-- ========================================== -->
+      <section id="view-requests" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="search-input-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="requests-search" placeholder="Search Hospital, Patient, REQ ID...">
+            </div>
+
+            <select id="requests-filter-urgency" class="select-filter">
+              <option value="">All Urgency Levels</option>
+              <option value="CRITICAL">STAT / Code Red</option>
+              <option value="URGENT">Urgent (Within 4 hrs)</option>
+              <option value="ROUTINE">Routine (24 hrs)</option>
+            </select>
+
+            <select id="requests-filter-status" class="select-filter">
+              <option value="">All Statuses</option>
+              <option value="Pending Verification">Pending Verification</option>
+              <option value="Approved">Approved / Reserved</option>
+              <option value="In-Transit">In-Transit</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
+          <div class="toolbar-right">
+            <button class="btn btn-danger-emergency btn-sm" id="btn-create-request-modal">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              New Emergency Request
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Requesting Hospital</th>
+                <th>Patient Details</th>
+                <th>Group & Component</th>
+                <th>Units (Req / Alloc)</th>
+                <th>Urgency Level</th>
+                <th>Order Status</th>
+                <th>ETA / Delivery</th>
+                <th>Action Controls</th>
+              </tr>
+            </thead>
+            <tbody id="requests-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 4: DONORS REGISTRY -->
+      <!-- ========================================== -->
+      <section id="view-donors" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="search-input-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="donors-search" placeholder="Search donor name, phone, city...">
+            </div>
+
+            <select id="donors-filter-group" class="select-filter">
+              <option value="">All Blood Groups</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+
+            <select id="donors-filter-eligible" class="select-filter">
+              <option value="">All Eligibility Status</option>
+              <option value="true">Eligible Now</option>
+              <option value="false">Waiting Period / Deferred</option>
+            </select>
+          </div>
+
+          <div class="toolbar-right">
+            <button class="btn btn-secondary btn-sm" id="btn-eligibility-quiz-open">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Eligibility Quiz
+            </button>
+            <button class="btn btn-primary btn-sm" id="btn-register-donor-modal-open">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Register Donor
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Donor ID</th>
+                <th>Full Name</th>
+                <th>Blood Group</th>
+                <th>Age / Gender</th>
+                <th>Contact</th>
+                <th>Total Donations</th>
+                <th>Last Donated</th>
+                <th>Eligibility</th>
+                <th>Badge</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="donors-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 5: COMPATIBILITY MATRIX -->
+      <!-- ========================================== -->
+      <section id="view-compatibility" class="view-panel">
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" color="var(--primary)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              Interactive Transfusion Compatibility Calculator
+            </div>
+            <span class="badge badge-info">AABB & WHO Medical Standards</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Select a blood type below to analyze red blood cell (RBC) and blood plasma compatibility guidelines.
+          </p>
+
+          <div class="compat-matrix-grid" id="compat-selector-buttons">
+            <!-- 8 blood group buttons -->
+          </div>
+
+          <div class="compat-details-card" id="compat-details-display">
+            <!-- Loaded dynamically based on selected group -->
+          </div>
+        </div>
+
+        <!-- Educational Reference Cards -->
+        <div class="kpi-grid">
+          <div class="card">
+            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">Universal Red Cell Donor (O Negative)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+              O- red blood cells lack A, B, and Rh antigens. In trauma emergencies where there is no time to cross-match, O- is the gold standard for immediate transfusion. Only 7% of the global population has O- blood.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--accent-blue);">Universal Plasma Donor (AB Positive)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+              AB+ plasma has no anti-A or anti-B antibodies, making it universally compatible with patients of any blood group. In contrast, AB+ individuals can receive red blood cells from any group.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 6: DONATION CAMPS & MOBILE DRIVES -->
+      <!-- ========================================== -->
+      <section id="view-camps" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="page-title" style="font-size: 1.1rem;">Upcoming Regional Blood Drives & Mobile Units</div>
+          </div>
+        </div>
+
+        <div id="camps-list-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+          <!-- Dynamically populated camps cards -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 7: APPOINTMENTS & SLOTS -->
+      <!-- ========================================== -->
+      <section id="view-appointments" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="page-title" style="font-size: 1.1rem;">Scheduled Blood Donation Appointments</div>
+          </div>
+          <div class="toolbar-right">
+            <button class="btn btn-primary btn-sm" id="btn-book-appointment-modal-open">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Book Donation Slot
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Appointment ID</th>
+                <th>Donor Name</th>
+                <th>Contact</th>
+                <th>Blood Group</th>
+                <th>Blood Bank Center</th>
+                <th>Date & Slot</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="appointments-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 8: REPORTS & ANALYTICS -->
+      <!-- ========================================== -->
+      <section id="view-reports" class="view-panel">
+        <div class="toolbar-bar no-print">
+          <div class="toolbar-left">
+            <div class="page-title" style="font-size: 1.1rem;">Transfusion & Inventory Management Report</div>
+          </div>
+          <div class="toolbar-right">
+            <button class="btn btn-secondary btn-sm" onclick="window.print()">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print Official Report
+            </button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <div class="card-title">Monthly Blood Utilization & Collection Trends</div>
+            <span class="badge badge-success">Year to Date</span>
+          </div>
+          <div class="canvas-container" style="height: 250px;">
+            <canvas id="canvas-report-trend"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Executive Transfusion Summary</div>
+            <span class="badge badge-neutral" id="report-date-stamp">Date: 2026-09-24</span>
+          </div>
+          <div style="font-size: 0.9rem; line-height: 1.8; color: var(--text-main);" id="report-summary-text">
+            <!-- Dynamically populated executive summary -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 9: AUDIT LOGS -->
+      <!-- ========================================== -->
+      <section id="view-audit" class="view-panel">
+        <div class="toolbar-bar">
+          <div class="toolbar-left">
+            <div class="page-title" style="font-size: 1.1rem;">System Audit Trail & Compliance Log</div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>User / System</th>
+                <th>Action Type</th>
+                <th>Operation Details</th>
+              </tr>
+            </thead>
+            <tbody id="audit-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- MODALS -->
+<!-- ========================================== -->
+
+<!-- Modal 1: Add Blood Unit -->
+<div class="modal-overlay" id="modal-add-unit">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" color="var(--primary)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        Register Inbound Blood Unit
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="form-add-unit">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Blood Group *</label>
+            <select class="form-select" id="add-unit-group" required>
+              <option value="O-">O- (Universal)</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Component Type *</label>
+            <select class="form-select" id="add-unit-comp" required>
+              <option value="PRBC">Packed Red Blood Cells (PRBC)</option>
+              <option value="WB">Whole Blood (WB)</option>
+              <option value="PLT">Platelets (PLT)</option>
+              <option value="FFP">Fresh Frozen Plasma (FFP)</option>
+              <option value="CRYO">Cryoprecipitate (CRYO)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Volume (ml) *</label>
+            <input type="number" class="form-input" id="add-unit-volume" value="300" min="50" max="600" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Collection Center *</label>
+            <select class="form-select" id="add-unit-center" required>
+              <option value="CEN-01">Metro Central Blood Bank</option>
+              <option value="CEN-02">St. Jude Regional Blood Center</option>
+              <option value="CEN-03">Apex Trauma Hub</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Collection Date *</label>
+            <input type="date" class="form-input" id="add-unit-date" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Storage Location / Shelf</label>
+            <input type="text" class="form-input" id="add-unit-location" placeholder="e.g. Fridge A-02 (Shelf 1)" value="Fridge A-01 (Shelf 1)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Screening & Pathogen Testing Status</label>
+          <select class="form-select" id="add-unit-screening">
+            <option value="Passed">Passed (HIV, HBV, HCV, Syphilis, Malaria Negative)</option>
+            <option value="Pending NAT">Pending NAT Testing (Quarantined)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Blood Unit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal 2: Create Emergency Request -->
+<div class="modal-overlay" id="modal-create-request">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Emergency Hospital Transfusion Request
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="form-create-request">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Requesting Hospital *</label>
+            <select class="form-select" id="req-hospital" required>
+              <option value="City Memorial Hospital">City Memorial Hospital (Trauma Center)</option>
+              <option value="Apex Heart & Surgical Institute">Apex Heart & Surgical Institute</option>
+              <option value="St. Luke Children’s Specialty Hospital">St. Luke Children’s Hospital</option>
+              <option value="Riverdale General Hospital">Riverdale General Hospital</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Patient Name / Bay *</label>
+            <input type="text" class="form-input" id="req-patient" placeholder="e.g. John Doe (ICU-3)" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Patient Blood Group *</label>
+            <select class="form-select" id="req-blood-group" required>
+              <option value="O-">O- (Universal Red Cell)</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Component Required *</label>
+            <select class="form-select" id="req-component" required>
+              <option value="PRBC">Packed Red Blood Cells (PRBC)</option>
+              <option value="WB">Whole Blood (WB)</option>
+              <option value="PLT">Platelets (PLT)</option>
+              <option value="FFP">Fresh Frozen Plasma (FFP)</option>
+              <option value="CRYO">Cryoprecipitate (CRYO)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Units Needed *</label>
+            <input type="number" class="form-input" id="req-units" min="1" max="10" value="2" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Triage Urgency Level *</label>
+            <select class="form-select" id="req-urgency" required>
+              <option value="CRITICAL">STAT / Code Red (Immediate &lt; 1 hr)</option>
+              <option value="URGENT">Urgent (Within 4 hrs)</option>
+              <option value="ROUTINE">Routine (Within 24 hrs)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Live Stock Match Indicator Box -->
+        <div id="req-live-match-box" style="background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.75rem; font-size: 0.85rem;">
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Live Inventory Compatibility Check:</div>
+          <div id="req-match-text" style="color: var(--text-muted);">Checking reserve levels...</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Clinical Indication / Diagnosis *</label>
+          <textarea class="form-textarea" id="req-reason" rows="2" placeholder="e.g. Massive hemorrhage due to blunt trauma" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Attending Physician / Transfusion Officer *</label>
+          <input type="text" class="form-input" id="req-doctor" placeholder="e.g. Dr. Alex Mercer" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-danger-emergency">Submit Transfusion Request</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal 3: Register New Donor -->
+<div class="modal-overlay" id="modal-register-donor">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" color="var(--primary)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        Register LifeSaver Donor
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="form-register-donor">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-input" id="donor-name" required placeholder="e.g. Jonathan Hope">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Blood Group *</label>
+            <select class="form-select" id="donor-group" required>
+              <option value="O-">O-</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-input" id="donor-email" required placeholder="donor@example.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" class="form-input" id="donor-phone" required placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="donor-gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Weight (kg) *</label>
+            <input type="number" class="form-input" id="donor-weight" value="68" min="45" max="180" required>
+            <span class="form-hint">Must be at least 50kg for standard whole blood donation</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">City / Residential Area</label>
+          <input type="text" class="form-input" id="donor-address" placeholder="e.g. 100 Main St, Metropolis">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Registration</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal 4: Digital Donor ID Card & Print View -->
+<div class="modal-overlay" id="modal-donor-card">
+  <div class="modal-dialog" style="max-width: 520px;">
+    <div class="modal-header">
+      <div class="modal-title">LifeSaver Digital Donor Pass</div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body" style="align-items: center;">
+      <div class="donor-id-card" id="digital-donor-card-element">
+        <div class="donor-card-top">
+          <div>
+            <div class="donor-card-title">National Transfusion Registry</div>
+            <div class="donor-card-org">PulseLink Blood Bank</div>
+          </div>
+          <div class="donor-blood-symbol" id="card-blood-group">O-</div>
+        </div>
+
+        <div class="donor-card-name" id="card-donor-name">Alexander Reed</div>
+        <div class="donor-card-id" id="card-donor-id">ID: DON-1001</div>
+
+        <div class="donor-card-stats">
+          <div>
+            <div class="donor-stat-val" id="card-donor-donations">12</div>
+            <div class="donor-stat-lbl">Donations</div>
+          </div>
+          <div>
+            <div class="donor-stat-val" id="card-donor-lives">36</div>
+            <div class="donor-stat-lbl">Lives Saved</div>
+          </div>
+          <div>
+            <div class="donor-stat-val" id="card-donor-badge">Platinum</div>
+            <div class="donor-stat-lbl">Honor Tier</div>
+          </div>
+        </div>
+
+        <div class="donor-card-barcode">
+          <div>
+            <div class="barcode-lines">||| | |||| || | || |||| |</div>
+            <div id="card-barcode-text">DON-1001-PULSELINK</div>
+          </div>
+          <div style="text-align: right;">
+            <div>STATUS: VERIFIED</div>
+            <div>EXPIRY: NEVER</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+      <button type="button" class="btn btn-primary" id="btn-print-donor-card">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Donor Card
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5: Eligibility Self-Assessment Quiz -->
+<div class="modal-overlay" id="modal-eligibility-quiz">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">Donor Pre-Screening Eligibility Quiz</div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="quiz-step-container">
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Answer these 4 standard health screening questions to check your immediate eligibility for donating blood.
+        </p>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">1. Are you between 18 and 65 years old?</label>
+          <select class="form-select" id="quiz-q1">
+            <option value="yes">Yes</option>
+            <option value="no">No (Under 18 or over 65)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">2. Is your body weight 50 kg (110 lbs) or more?</label>
+          <select class="form-select" id="quiz-q2">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">3. Has it been at least 3 months (90 days) since your last whole blood donation?</label>
+          <select class="form-select" id="quiz-q3">
+            <option value="yes">Yes / I have never donated before</option>
+            <option value="no">No (Donated recently)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">4. Are you currently free of fever, flu symptoms, and antibiotics?</label>
+          <select class="form-select" id="quiz-q4">
+            <option value="yes">Yes, feeling healthy</option>
+            <option value="no">No, currently unwell</option>
+          </select>
+        </div>
+
+        <div id="quiz-result-box" style="display: none; padding: 1rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9rem; margin-top: 0.5rem;"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+      <button type="button" class="btn btn-primary" id="btn-submit-quiz">Evaluate Eligibility</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 6: Book Appointment -->
+<div class="modal-overlay" id="modal-book-appointment">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">Book Blood Donation Appointment</div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="form-book-appointment">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Donor Name *</label>
+          <input type="text" class="form-input" id="appt-name" required placeholder="Your full name">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Contact Phone *</label>
+            <input type="tel" class="form-input" id="appt-phone" required placeholder="+1 (555) ...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Blood Group *</label>
+            <select class="form-select" id="appt-group" required>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Donation Center *</label>
+          <select class="form-select" id="appt-center" required>
+            <option value="Metro Central Blood Bank">Metro Central Blood Bank (Metropolis)</option>
+            <option value="St. Jude Regional Blood Center">St. Jude Regional Blood Center</option>
+            <option value="Apex Trauma & Transfusion Hub">Apex Trauma Hub (Riverdale)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date *</label>
+            <input type="date" class="form-input" id="appt-date" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Time Slot *</label>
+            <select class="form-select" id="appt-slot" required>
+              <option value="09:00 AM">09:00 AM</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="11:45 AM">11:45 AM</option>
+              <option value="02:00 PM">02:00 PM</option>
+              <option value="03:30 PM">03:30 PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal 7: Live Request Dispatch Details Tracker -->
+<div class="modal-overlay" id="modal-dispatch-details">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title" id="dispatch-modal-title">Live Dispatch Tracking</div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body" id="dispatch-modal-content">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-close-modal>Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- SCRIPTS -->
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
